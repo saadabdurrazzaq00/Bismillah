@@ -503,8 +503,6 @@ const groups = [
 ];
 
 const container = document.getElementById("duas");
-const search = document.getElementById("search");
-const speed = document.getElementById("speed");
 const announcer = document.getElementById("announcer");
 
 const player = new Audio();
@@ -576,7 +574,7 @@ async function toggleAudio(dua, button) {
   button.innerHTML = pauseIcon + " Stop";
 
   player.src = audioPath(dua.id);
-  player.playbackRate = Number(speed.value);
+player.playbackRate = 1;
 
   try {
     await player.play();
@@ -601,10 +599,6 @@ player.addEventListener("error", () => {
     announcer.textContent = `Could not load ${missing}.`;
     stopAudio();
   }
-});
-
-speed.addEventListener("change", () => {
-  player.playbackRate = Number(speed.value);
 });
 
 function createCard(dua) {
@@ -663,7 +657,7 @@ function render() {
   stopAudio();
   container.replaceChildren();
 
-  const query = search.value.trim().toLocaleLowerCase();
+  const query = "";
   let visible = 0;
 
   for (const group of groups) {
@@ -696,7 +690,6 @@ function render() {
   }
 }
 
-search.addEventListener("input", render);
 document.addEventListener("visibilitychange", () => {
   if (document.hidden) stopAudio();
 });
